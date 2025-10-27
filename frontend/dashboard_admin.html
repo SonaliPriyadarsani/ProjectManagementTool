@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Project Management</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<script>
+const API_BASE = "http://127.0.0.1:8000";
+const token = localStorage.getItem("token");
+const username = localStorage.getItem("username");
+document.getElementById("welcome").innerText = `Welcome, ${username} (Admin)`;
+
+// Fetch all users (if you add /users endpoint later)
+</script>
+
+<body>
+  <div class="container">
+    <h2>👑 Admin Dashboard</h2>
+    <h3 id="welcome"></h3>
+    <button onclick="logout()">Logout</button>
+    <hr>
+    <h3>Admin Controls</h3>
+    <button onclick="alert('Feature coming soon: Manage Users')">Manage Users</button>
+    <button onclick="alert('Feature coming soon: View Reports')">View Reports</button>
+  </div>
+  <script src="app.js">
+    window.onload = () => {
+  const username = localStorage.getItem("username");
+  const role = localStorage.getItem("role");
+  document.getElementById("welcome").innerText = `Welcome, ${username} (${role})`;
+};
+
+  </script>
+</body>
+</html>

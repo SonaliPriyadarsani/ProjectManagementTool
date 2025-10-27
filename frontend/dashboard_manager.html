@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    button {
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #1abc9c;
+    }
+
+    form {
+      margin-top: 20px;
+      display: none; /* hidden initially */
+      text-align: left;
+    }
+
+    input, textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    h4 {
+      margin-top: 25px;
+      color: #2c3e50;
+    }
+
+    ul {
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📋 Manager Dashboard</h2>
+    <button onclick="logout()">Logout</button>
+
+    <h3>Manager Controls</h3>
+    <button onclick="toggleForm()">➕ Create Project</button>
+
+    <!-- Hidden Form -->
+    <form id="projectForm">
+      <h4>Create New Project</h4>
+      <input type="text" id="projectName" placeholder="Project Name" required />
+      <textarea id="projectDescription" placeholder="Project Description"></textarea>
+      <input type="date" id="startDate" />
+      <input type="date" id="endDate" />
+      <button type="submit">Submit Project</button>
+    </form>
+
+    <h4>All Projects</h4>
+    <ul id="projects"></ul>
+  </div>
+
+  <button id="showTaskForm">➕ Assign Task</button>
+
+<div id="taskForm" style="display:none; margin-top: 15px;">
+  <input type="text" id="title" placeholder="Task Title" required><br>
+  <textarea id="description" placeholder="Task Description"></textarea><br>
+  <input type="number" id="project_id" placeholder="Project ID" required><br>
+  <input type="number" id="assignee_id" placeholder="Developer ID" required><br>
+  <input type="date" id="deadline" required><br>
+  <button id="assignTask">Assign Task</button>
+</div>
+
+  <script>
+    const API_BASE = "http://127.0.0.1:8000";
+    const token = localStorage.getItem("token");
+
+    // ✅ Logout
+    function logout() {
+      localStorage.clear();
+      window.location.href = "login.html";
+    }
+
+    // ✅ Show/Hide Create Project form
+    function toggleForm() {
+      const form = document.getElementById("projectForm");
+      form.style.display = form.style.display === "none" || form.style.display === "" ? "block" : "none";
+    }
+
+    // ✅ Fetch all projects
+    async function loadProjects() {
+      const res = await fetch(`${API_BASE}/projects/`, {
+        headers: { "Authorization": `Bearer ${token}` },
+      });
+      const data = await res.json();
+      const list = document.getElementById("projects");
+      list.innerHTML = data.map(p => `<li><b>${p.name}</b> - ${p.description || ""}</li>`).join("");
+    }
+
+    // ✅ Handle form submit
+    const projectForm = document.getElementById("projectForm");
+    projectForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const projectData = {
+        name: document.getElementById("projectName").value,
+        description: document.getElementById("projectDescription").value,
+        start_date: document.getElementById("startDate").value,
+        end_date: document.getElementById("endDate").value,
+      };
+
+      const res = await fetch(`${API_BASE}/projects/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify(projectData),
+      });
+
+      if (res.ok) {
+        alert("✅ Project created successfully!");
+        projectForm.reset();
+        projectForm.style.display = "none"; // hide form again
+        loadProjects();
+      } else {
+        const err = await res.json();
+        alert("❌ Error: " + (err.detail || "Something went wrong"));
+      }
+    });
+
+    // Load projects on start
+    loadProjects();
+  </script>
+</body>
+</html>

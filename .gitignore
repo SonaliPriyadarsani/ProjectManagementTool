@@ -1,0 +1,22 @@
+# Virtual environment
+venv/
+.env/
+
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Database and logs
+*.db
+*.sqlite3
+*.log
+
+# IDE / editor settings
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db

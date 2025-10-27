@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developer Dashboard | Project Management</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<script>
+const API_BASE = "http://127.0.0.1:8000";
+const token = localStorage.getItem("token");
+const username = localStorage.getItem("username");
+document.getElementById("welcome").innerText = `Welcome, ${username} (Developer)`;
+
+// Fetch assigned tasks
+async function loadTasks() {
+  const res = await fetch(`${API_BASE}/tasks/`, {
+    headers: { "Authorization": `Bearer ${token}` }
+  });
+  const tasks = await res.json();
+  const list = document.getElementById("taskList");
+  list.innerHTML = tasks.map(t => `<li><b>${t.title}</b> (${t.status})</li>`).join("");
+}
+loadTasks();
+</script>
+
+<body>
+  <div class="container">
+    <h2>💻 Developer Dashboard</h2>
+    <h3 id="welcome"></h3>
+    <button onclick="logout()">Logout</button>
+    <hr>
+    <h3>My Tasks</h3>
+    <div id="taskList"></div>
+  </div>
+  <script src="./app.js">
+    window.onload = () => {
+  const username = localStorage.getItem("username");
+  const role = localStorage.getItem("role");
+  document.getElementById("welcome").innerText = `Welcome, ${username} (${role})`;
+};
+
+window.logout = function() {
+  localStorage.clear();
+  alert("You have been logged out!");
+  window.location.href = "login.html";
+};
+
+  </script>
+</body>
+</html>
