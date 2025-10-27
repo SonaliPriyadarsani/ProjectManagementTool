@@ -91,7 +91,8 @@ Swagger UI: http://127.0.0.1:8000/docs
 Swagger → API Testing
 GitHub → Version Control
 VS Code → Development
-MySQL Workbench → Database Management
+MySQL  → Database Management
 
 
 For the E-R diagram, I have attached a document in this repository.The repository also includes database schema images and testing module screenshots for better understanding and verification.
+
