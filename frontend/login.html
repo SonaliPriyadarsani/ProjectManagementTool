@@ -4,7 +4,127 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login | Project Management</title>
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* -------- Global Styles -------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* -------- Container -------- */
+.container {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 40px 35px;
+  text-align: center;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* -------- Headings -------- */
+h1, h2 {
+  color: #00d9ff;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+/* -------- Form Styles -------- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input {
+  padding: 12px 15px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+input::placeholder {
+  color: #d0d0d0;
+}
+
+input:focus {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.02);
+}
+
+/* -------- Button -------- */
+button {
+  background: #00d9ff;
+  color: #0f172a;
+  border: none;
+  padding: 12px 0;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #0f172a;
+  color: #00d9ff;
+  transform: scale(1.05);
+}
+
+/* -------- Links -------- */
+p {
+  margin-top: 20px;
+  color: #cfd9e3;
+  font-size: 0.95rem;
+}
+
+a {
+  color: #00d9ff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* -------- Animation -------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* -------- Responsive -------- */
+@media (max-width: 480px) {
+  .container {
+    padding: 30px 25px;
+  }
+
+  input, button {
+    font-size: 0.95rem;
+  }
+}
+
+  </style>
 </head>
 <body>
   <div class="container">

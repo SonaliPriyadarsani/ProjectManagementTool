@@ -4,7 +4,133 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard | Project Management</title>
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ====== Global Reset ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ====== Body ====== */
+body {
+  background: #0f172a; /* deep navy */
+  color: #e2e8f0; /* soft white */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+/* ====== Dashboard Container ====== */
+.container {
+  background: #1e293b; /* dark slate */
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
+  max-width: 500px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 40px rgba(56, 189, 248, 0.5);
+}
+
+/* ====== Headings ====== */
+h2 {
+  font-size: 1.8rem;
+  color: #38bdf8; /* neon blue */
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+}
+
+h3 {
+  margin: 15px 0;
+  font-size: 1.2rem;
+  color: #cbd5e1;
+}
+
+/* ====== Divider ====== */
+hr {
+  border: none;
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  margin: 20px 0;
+}
+
+/* ====== Buttons ====== */
+button {
+  background: linear-gradient(90deg, #0ea5e9, #3b82f6);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #38bdf8, #60a5fa);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+  transform: scale(1.05);
+}
+
+/* ====== Logout Button ====== */
+button:first-of-type {
+  background: linear-gradient(90deg, #f43f5e, #ef4444);
+}
+
+button:first-of-type:hover {
+  background: linear-gradient(90deg, #fb7185, #f87171);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 600px) {
+  .container {
+    padding: 25px;
+    width: 90%;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+.container {
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 2px;
+  background: linear-gradient(45deg, #0ea5e9, #38bdf8, #818cf8);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borderGlow 4s linear infinite;
+}
+
+@keyframes borderGlow {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+
+  </style>
 </head>
 <script>
 const API_BASE = "http://127.0.0.1:8000";
